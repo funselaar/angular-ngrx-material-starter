@@ -20,27 +20,27 @@
         <h2>
           {{ 'anms.examples.todos.list' | translate }}
           <button class="todos-filter" mat-icon-button [matMenuTriggerFor]="todosFilter" aria-label="open filter menu">
-            <fa-icon icon="filter"></fa-icon>
+            <mat-icon>filter_list</mat-icon>
           </button>
           <mat-menu class="todos-filter-menu-overlay" #todosFilter="matMenu" xPosition="before">
             <button mat-menu-item (click)="onFilterTodos('ALL')" [ngClass]="{ active: todos.filter === 'ALL' }"
               aria-label="show all items">
               <mat-icon>
-                <fa-icon icon="tasks"></fa-icon>
+                <mat-icon>format_list_bulleted</mat-icon>
               </mat-icon>
               <span>{{ 'anms.examples.todos.filter.all' | translate }}</span>
             </button>
             <button mat-menu-item (click)="onFilterTodos('DONE')" [ngClass]="{ active: todos.filter === 'DONE' }"
               aria-label="show completed items">
               <mat-icon>
-                <fa-icon icon="check"></fa-icon>
+                <mat-icon>check</mat-icon>
               </mat-icon>
               <span>{{ 'anms.examples.todos.filter.done' | translate }}</span>
             </button>
             <button mat-menu-item (click)="onFilterTodos('ACTIVE')" [ngClass]="{ active: todos.filter === 'ACTIVE' }"
               aria-label="show active items">
               <mat-icon>
-                <fa-icon icon="square"></fa-icon>
+                <mat-icon>crop_square</mat-icon>
               </mat-icon>
               <span>{{ 'anms.examples.todos.filter.active' | translate }}</span>
             </button>

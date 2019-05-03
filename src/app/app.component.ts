@@ -1,5 +1,5 @@
 import browser from 'browser-detect';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChildren, QueryList } from '@angular/core';
 import { Store, select } from '@ngrx/store';
 import { Observable } from 'rxjs';
 
@@ -20,6 +20,9 @@ import {
   selectSettingsLanguage,
   selectSettingsStickyHeader
 } from './settings';
+import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
+import { map } from 'rxjs/operators';
+import { MatSidenav } from '@angular/material';
 
 @Component({
   selector: 'anms-root',
@@ -36,7 +39,6 @@ export class AppComponent implements OnInit {
   languages = ['en', 'de', 'sk', 'fr', 'es', 'pt-br', 'zh-cn', 'he'];
   navigation = [
     { link: 'about', label: 'anms.menu.about' },
-    { link: 'features', label: 'anms.menu.features' },
     { link: 'examples', label: 'anms.menu.examples' }
   ];
   navigationSideMenu = [
@@ -44,12 +46,20 @@ export class AppComponent implements OnInit {
     { link: 'settings', label: 'anms.menu.settings' }
   ];
 
+  isHandset$: Observable<boolean> = this.breakpointObserver
+    .observe(Breakpoints.Handset)
+    .pipe(map(result => result.matches));
+
+  @ViewChildren('drawer')
+  dc: QueryList<MatSidenav>;
+
   isAuthenticated$: Observable<boolean>;
   stickyHeader$: Observable<boolean>;
   language$: Observable<string>;
   theme$: Observable<string>;
 
   constructor(
+    private breakpointObserver: BreakpointObserver,
     private store: Store<AppState>,
     private storageService: LocalStorageService
   ) {}
